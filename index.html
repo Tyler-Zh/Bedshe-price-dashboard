@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedsure Portfolio Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Wayfair Palettes */
+        .wf-classic-dark-purple { color: #520F54; }
+        .wf-classic-dark-teal { color: #01768B; }
+        .wf-classic-light-green { color: #82D170; }
+        .wf-orange { color: #FB7E00; }
+        .bg-wf-classic-dark-purple { background-color: #520F54; }
+        .bg-wf-classic-light-purple { background-color: #C98DC5; }
+        .bg-wf-classic-dark-teal { background-color: #01768B; }
+        .bg-wf-classic-light-teal { background-color: #84C6D1; }
+        .bg-wf-classic-lime-green { background-color: #C6D636; }
+        .bg-wf-classic-light-green { background-color: #82D170; }
+        .bg-wf-classic-yellow { background-color: #F8CF1C; }
+        .bg-wf-secondary-red { background-color: #990E35; }
+        .bg-wf-secondary-pink { background-color: #DC647E; }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .kpi-card {
+            border-left-width: 4px;
+            transition: all 0.3s ease-in-out;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        h2 {
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+        <!-- Header -->
+        <header class="text-center pb-6 mb-8">
+            <h1 class="text-5xl font-bold text-gray-800">Bedsure Portfolio Analysis</h1>
+            <p class="text-xl text-gray-500 mt-2">Margin, Competitiveness, and Performance Overview</p>
+        </header>
+
+        <!-- Headline Numbers -->
+        <section id="headline-numbers" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="kpi-card bg-gray-50 rounded-lg p-5 border-l-wf-classic-dark-teal shadow-sm">
+                <h3 class="text-md font-semibold text-gray-500">Overall Weighted Margin</h3>
+                <p id="total-margin" class="text-4xl font-bold wf-classic-dark-teal mt-1"></p>
+            </div>
+            <div class="kpi-card bg-gray-50 rounded-lg p-5 border-l-wf-classic-dark-purple shadow-sm">
+                <h3 class="text-md font-semibold text-gray-500">Total Revenue (WSC L12M)</h3>
+                <p id="total-revenue" class="text-4xl font-bold wf-classic-dark-purple mt-1"></p>
+            </div>
+            <div class="kpi-card bg-gray-50 rounded-lg p-5 border-l-wf-classic-light-green shadow-sm">
+                <h3 class="text-md font-semibold text-gray-500">Total Products Analyzed</h3>
+                <p id="total-products" class="text-4xl font-bold wf-classic-light-green mt-1"></p>
+            </div>
+            <div class="kpi-card bg-gray-50 rounded-lg p-5 border-l-wf-orange shadow-sm">
+                <h3 class="text-md font-semibold text-gray-500">Total Competitiveness</h3>
+                <p id="total-competitiveness" class="text-4xl font-bold wf-orange mt-1"></p>
+            </div>
+        </section>
+
+        <!-- Ship Lane & Competitor Matching Analysis -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div>
+                <h2>Ship Lane Analysis: CG vs DS</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-4 font-semibold text-gray-600 rounded-tl-lg">Metric</th>
+                                <th class="p-4 font-semibold text-gray-600 text-center">CastleGate (CG)</th>
+                                <th class="p-4 font-semibold text-gray-600 text-center rounded-tr-lg">DropShip (DS)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr>
+                                <td class="p-4 font-medium">Total Part Numbers</td>
+                                <td id="cg-parts" class="p-4 text-center text-lg font-semibold"></td>
+                                <td id="ds-parts" class="p-4 text-center text-lg font-semibold"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-medium">Total Revenue</td>
+                                <td id="cg-revenue" class="p-4 text-center text-lg font-semibold"></td>
+                                <td id="ds-revenue" class="p-4 text-center text-lg font-semibold"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-medium">Weighted Margin</td>
+                                <td id="cg-margin" class="p-4 text-center text-lg font-semibold"></td>
+                                <td id="ds-margin" class="p-4 text-center text-lg font-semibold"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-medium">Competitiveness</td>
+                                <td id="cg-competitiveness" class="p-4 text-center text-lg font-semibold"></td>
+                                <td id="ds-competitiveness" class="p-4 text-center text-lg font-semibold"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h2>Competitor Price Matching</h2>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                        <h3 class="font-semibold text-gray-600 mb-2">Part # Share</h3>
+                        <div class="chart-container mx-auto" style="height: 150px; width: 150px;"><canvas id="parts-share-chart"></canvas></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-600 mb-2">Revenue Share</h3>
+                        <div class="chart-container mx-auto" style="height: 150px; width: 150px;"><canvas id="revenue-share-chart"></canvas></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-600 mb-2">Margin Share</h3>
+                        <div class="chart-container mx-auto" style="height: 150px; width: 150px;"><canvas id="margin-share-chart"></canvas></div>
+                    </div>
+                </div>
+                <div class="mt-4 bg-gray-50 rounded-lg p-4 flex justify-around">
+                    <div>
+                        <span class="text-gray-500">Margin (Matched): </span>
+                        <span id="matched-margin" class="font-bold text-lg"></span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500">Margin (Unmatched): </span>
+                        <span id="unmatched-margin" class="font-bold text-lg"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitiveness by Price Tier -->
+        <section class="mb-12">
+            <h2>Competitiveness & Margin by Price Tier</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="p-4 font-semibold text-gray-600 rounded-tl-lg">Price Tier</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center"># of Parts</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center">WSC Weight %</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center">Competitiveness %</th>
+                            <th class="p-4 font-semibold text-gray-600 text-center rounded-tr-lg">Margin %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="competitiveness-by-price-tier-table" class="divide-y">
+                        <!-- Rows will be injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Contribution by Margin Tier -->
+        <section class="mb-12">
+            <h2>Contribution by Margin Tier</h2>
+            <table class="w-full text-left">
+                <thead class="border-b">
+                    <tr>
+                        <th class="pb-2 font-semibold text-gray-600">Margin Tier</th>
+                        <th class="pb-2 font-semibold text-gray-600 text-center">% Parts</th>
+                        <th class="pb-2 font-semibold text-gray-600 text-center">% Revenue</th>
+                        <th class="pb-2 font-semibold text-gray-600 text-center">Weighted Margin</th>
+                        <th class="pb-2 font-semibold text-gray-600 text-center" style="width: 20%;">% Margin Contribution</th>
+                    </tr>
+                </thead>
+                <tbody id="contribution-margin-tier-table">
+                    <!-- Rows will be injected by JS -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Low Margin Analysis -->
+        <section class="mb-12">
+            <h2>Low Margin Analysis (Below 0%) by Price Tier</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-red-100">
+                        <tr>
+                            <th class="p-4 font-semibold text-red-800 rounded-tl-lg">Price Tier</th>
+                            <th class="p-4 font-semibold text-red-800 text-center"># of Parts</th>
+                            <th class="p-4 font-semibold text-red-800 text-center">Total Revenue (WSC)</th>
+                            <th class="p-4 font-semibold text-red-800 text-center">Total Profit Loss</th>
+                            <th class="p-4 font-semibold text-red-800 text-center rounded-tr-lg">Weighted Margin %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="low-margin-analysis-table" class="divide-y">
+                        <!-- Rows will be injected by JS -->
+                    </tbody>
+                    <tfoot class="bg-gray-100 font-bold">
+                        <tr>
+                            <td class="p-4 rounded-bl-lg">Total</td>
+                            <td id="low-margin-total-parts" class="p-4 text-center"></td>
+                            <td id="low-margin-total-revenue" class="p-4 text-center"></td>
+                            <td id="low-margin-total-profit" class="p-4 text-center text-red-600"></td>
+                            <td id="low-margin-total-margin" class="p-4 text-center text-red-600 rounded-br-lg"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- Detailed Margin Breakdowns -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1">
+                <h2 class="text-center">Margin & Price Tier - Matched</h2>
+                <div class="chart-container"><canvas id="marginPriceTierMatchedChart"></canvas></div>
+            </div>
+        </section>
+
+        <!-- Pricing Strategy Analysis - Matched Products -->
+        <section class="mb-12">
+            <h2>Pricing Strategy Analysis - Matched Products</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-4 font-semibold text-gray-600 rounded-tl-lg">Pricing Strategy</th>
+                                <th class="p-4 font-semibold text-gray-600 text-right"># Parts</th>
+                                <th class="p-4 font-semibold text-gray-600 text-right rounded-tr-lg">Margin %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pricing-strategy-table" class="divide-y">
+                            <!-- Rows will be injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                 <div class="chart-container"><canvas id="pricingStrategyByPriceTierChart"></canvas></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const infographicData = {
+            "headline_numbers": {
+                "overall_weighted_margin": "11.01%",
+                "total_revenue": "$2,896,267.80",
+                "total_products_analyzed": "9636",
+                "total_competitiveness": "77.15%"
+            },
+            "ship_lane_analysis": [
+                {
+                    "lane": "CG",
+                    "num_parts": 371,
+                    "wsc_l12m": "$639,839.22",
+                    "weighted_margin": "15.65%",
+                    "competitiveness": "78.44%"
+                },
+                {
+                    "lane": "DS",
+                    "num_parts": 9265,
+                    "wsc_l12m": "$2,256,428.58",
+                    "weighted_margin": "9.69%",
+                    "competitiveness": "77.10%"
+                }
+            ],
+            "competitor_matching": {
+                "parts": {
+                    "matched": 6407,
+                    "unmatched": 3229
+                },
+                "revenue": {
+                    "matched": 2740878.7006,
+                    "unmatched": 155389.0978
+                },
+                "margin": {
+                    "matched": 0.0996046390689499,
+                    "unmatched": 0.2951597231992039
+                }
+            },
+            "price_tier_analysis": [
+                {
+                    "price_tier": "0-20",
+                    "num_parts": 640,
+                    "wsc_weight_perc": "2.50%",
+                    "competitiveness_perc": "53.91%",
+                    "weighted_margin_perc": "-1.78%"
+                },
+                {
+                    "price_tier": "20-35",
+                    "num_parts": 1978,
+                    "wsc_weight_perc": "13.43%",
+                    "competitiveness_perc": "75.73%",
+                    "weighted_margin_perc": "6.57%"
+                },
+                {
+                    "price_tier": "35-60",
+                    "num_parts": 4144,
+                    "wsc_weight_perc": "55.93%",
+                    "competitiveness_perc": "81.27%",
+                    "weighted_margin_perc": "8.56%"
+                },
+                {
+                    "price_tier": "60-90",
+                    "num_parts": 1973,
+                    "wsc_weight_perc": "22.15%",
+                    "competitiveness_perc": "78.86%",
+                    "weighted_margin_perc": "18.00%"
+                },
+                {
+                    "price_tier": "90+",
+                    "num_parts": 901,
+                    "wsc_weight_perc": "5.99%",
+                    "competitiveness_perc": "74.03%",
+                    "weighted_margin_perc": "23.36%"
+                }
+            ],
+            "margin_tier_analysis": [
+                {
+                    "margin_tier": "< -11%",
+                    "perc_of_parts": "2.29%",
+                    "perc_of_revenue": "2.07%",
+                    "perc_of_margin": "-2.19%",
+                    "weighted_margin": "-11.69%",
+                    "margin_contribution_bar": -2.1948400925036506
+                },
+                {
+                    "margin_tier": "-11% - 0%",
+                    "perc_of_parts": "18.30%",
+                    "perc_of_revenue": "29.31%",
+                    "perc_of_margin": "-18.57%",
+                    "weighted_margin": "-6.98%",
+                    "margin_contribution_bar": -18.57126740876336
+                },
+                {
+                    "margin_tier": "0% - 10%",
+                    "perc_of_parts": "10.36%",
+                    "perc_of_revenue": "19.49%",
+                    "perc_of_margin": "8.63%",
+                    "weighted_margin": "4.88%",
+                    "margin_contribution_bar": 8.630544581685072
+                },
+                {
+                    "margin_tier": "10% - 18%",
+                    "perc_of_parts": "8.13%",
+                    "perc_of_revenue": "12.45%",
+                    "perc_of_margin": "15.30%",
+                    "weighted_margin": "13.54%",
+                    "margin_contribution_bar": 15.303382271739524
+                },
+                {
+                    "margin_tier": "18% - 28%",
+                    "perc_of_parts": "20.73%",
+                    "perc_of_revenue": "18.08%",
+                    "perc_of_margin": "38.60%",
+                    "weighted_margin": "23.51%",
+                    "margin_contribution_bar": 38.597952358566474
+                },
+                {
+                    "margin_tier": "> 28%",
+                    "perc_of_parts": "40.19%",
+                    "perc_of_revenue": "18.62%",
+                    "perc_of_margin": "58.23%",
+                    "weighted_margin": "34.44%",
+                    "margin_contribution_bar": 58.23422828927595
+                }
+            ],
+            "low_margin_analysis": [
+                { "price_tier": "0-20", "num_parts": 393, "total_revenue": "$49,988.57", "total_profit_loss": "$-4,460.99", "weighted_margin_perc": "-8.92%" },
+                { "price_tier": "20-35", "num_parts": 596, "total_revenue": "$175,422.97", "total_profit_loss": "$-12,968.71", "weighted_margin_perc": "-7.39%" },
+                { "price_tier": "35-60", "num_parts": 885, "total_revenue": "$573,043.39", "total_profit_loss": "$-40,859.46", "weighted_margin_perc": "-7.13%" },
+                { "price_tier": "60-90", "num_parts": 100, "total_revenue": "$94,248.91", "total_profit_loss": "$-6,725.58", "weighted_margin_perc": "-7.14%" },
+                { "price_tier": "90+", "num_parts": 10, "total_revenue": "$16,013.88", "total_profit_loss": "$-1,201.91", "weighted_margin_perc": "-7.50%" },
+                { "price_tier": "Total", "num_parts": 1984, "total_revenue": "$908,717.72", "total_profit_loss": "$-66,216.65", "weighted_margin_perc": "-7.29%" }
+            ],
+            "charts": {
+                "marginPriceTierMatched": {
+                    "labels": [
+                        "0-20",
+                        "20-35",
+                        "35-60",
+                        "60-90",
+                        "90+"
+                    ],
+                    "datasets": [
+                        { "label": "< -11%", "data": [ 96, 73, 51, 0, 0 ] },
+                        { "label": "-11% - 0%", "data": [ 293, 523, 834, 100, 10 ] },
+                        { "label": "0% - 10%", "data": [ 77, 294, 499, 108, 14 ] },
+                        { "label": "10% - 18%", "data": [ 27, 255, 343, 114, 33 ] },
+                        { "label": "18% - 28%", "data": [ 24, 284, 458, 205, 64 ] },
+                        { "label": "> 28%", "data": [ 40, 209, 523, 521, 335 ] }
+                    ]
+                },
+                "pricingStrategyByPriceTier": {
+                    "labels": [ "0-20", "20-35", "35-60", "60-90", "90+" ],
+                    "datasets": [
+                        { "label": "BrandedPromoPassthroughHandler", "data": [ 517, 1331, 2246, 625, 218 ] },
+                        { "label": "PiEpsilonHandler", "data": [ 26, 150, 347, 355, 204 ] },
+                        { "label": "CompetitorTargetPriceHandler", "data": [ 3, 128, 71, 11, 0 ] },
+                        { "label": "MapOHandler", "data": [ 11, 29, 32, 13, 2 ] },
+                        { "label": "FixedTakeRateHandler", "data": [ 0, 0, 7, 25, 25 ] }
+                    ]
+                },
+                "pricingStrategyAnalysis": [
+                    { "strategy": "BrandedPromoPassthroughHandler", "num_parts": 4937, "margin_perc": "7.69%" },
+                    { "strategy": "PiEpsilonHandler", "num_parts": 1082, "margin_perc": "29.38%" },
+                    { "strategy": "CompetitorTargetPriceHandler", "num_parts": 213, "margin_perc": "1.59%" },
+                    { "strategy": "MapOHandler", "num_parts": 87, "margin_perc": "30.31%" },
+                    { "strategy": "FixedTakeRateHandler", "num_parts": 57, "margin_perc": "39.15%" }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Populate Data ---
+            // Headline Numbers
+            document.getElementById('total-margin').textContent = infographicData.headline_numbers.overall_weighted_margin;
+            document.getElementById('total-revenue').textContent = infographicData.headline_numbers.total_revenue;
+            document.getElementById('total-products').textContent = infographicData.headline_numbers.total_products_analyzed;
+            document.getElementById('total-competitiveness').textContent = infographicData.headline_numbers.total_competitiveness;
+
+            // Ship Lane Analysis
+            document.getElementById('cg-parts').textContent = infographicData.ship_lane_analysis[0].num_parts.toLocaleString();
+            document.getElementById('cg-revenue').textContent = infographicData.ship_lane_analysis[0].wsc_l12m;
+            document.getElementById('cg-margin').textContent = infographicData.ship_lane_analysis[0].weighted_margin;
+            document.getElementById('cg-competitiveness').textContent = infographicData.ship_lane_analysis[0].competitiveness;
+            document.getElementById('ds-parts').textContent = infographicData.ship_lane_analysis[1].num_parts.toLocaleString();
+            document.getElementById('ds-revenue').textContent = infographicData.ship_lane_analysis[1].wsc_l12m;
+            document.getElementById('ds-margin').textContent = infographicData.ship_lane_analysis[1].weighted_margin;
+            document.getElementById('ds-competitiveness').textContent = infographicData.ship_lane_analysis[1].competitiveness;
+
+            // Competitor Matching
+            document.getElementById('matched-margin').textContent = (infographicData.competitor_matching.margin.matched * 100).toFixed(2) + '%';
+            document.getElementById('unmatched-margin').textContent = (infographicData.competitor_matching.margin.unmatched * 100).toFixed(2) + '%';
+
+            // Competitiveness by Price Tier Table
+            const competitivenessTableBody = document.getElementById('competitiveness-by-price-tier-table');
+            infographicData.price_tier_analysis.forEach(row => {
+                 const tr = document.createElement('tr');
+                 tr.innerHTML = `
+                    <td class="p-4 font-medium">${row.price_tier}</td>
+                    <td class="p-4 text-center">${row.num_parts.toLocaleString()}</td>
+                    <td class="p-4 text-center font-semibold">${row.wsc_weight_perc}</td>
+                    <td class="p-4 text-center font-semibold">${row.competitiveness_perc}</td>
+                    <td class="p-4 text-center font-semibold">${row.weighted_margin_perc}</td>
+                `;
+                competitivenessTableBody.appendChild(tr);
+            });
+
+            // Contribution by Margin Tier Table
+            const contributionTableBody = document.getElementById('contribution-margin-tier-table');
+            infographicData.margin_tier_analysis.forEach(row => {
+                const tr = document.createElement('tr');
+                const marginShare = row.margin_contribution_bar;
+                const barWidth = Math.min(Math.abs(marginShare), 100);
+                const barColor = marginShare < 0 ? '#DC647E' : '#01768B';
+                const marginLeft = marginShare < 0 ? 50 - barWidth : 50;
+
+                tr.innerHTML = `
+                    <td class="py-3">${row.margin_tier}</td>
+                    <td class="py-3 text-center">${row.perc_of_parts}</td>
+                    <td class="py-3 text-center">${row.perc_of_revenue}</td>
+                    <td class="py-3 text-center font-semibold">${row.weighted_margin}</td>
+                    <td class="py-3 text-center relative">
+                        <span>${row.perc_of_margin}</span>
+                        <div class="absolute bottom-1 left-0 w-full h-1.5 bg-gray-200 rounded">
+                           <div class="h-1.5 rounded" style="width: ${barWidth}%; background-color: ${barColor}; margin-left: ${marginLeft}%;"></div>
+                        </div>
+                    </td>
+                `;
+                contributionTableBody.appendChild(tr);
+            });
+
+            // Low Margin Analysis Table
+            const lowMarginTableBody = document.getElementById('low-margin-analysis-table');
+            infographicData.low_margin_analysis.slice(0, -1).forEach(row => {
+                 const tr = document.createElement('tr');
+                 tr.innerHTML = `
+                    <td class="p-4 font-medium">${row.price_tier}</td>
+                    <td class="p-4 text-center">${row.num_parts.toLocaleString()}</td>
+                    <td class="p-4 text-center">${row.total_revenue}</td>
+                    <td class="p-4 text-center font-semibold text-red-600">${row.total_profit_loss}</td>
+                    <td class="p-4 text-center font-semibold text-red-600">${row.weighted_margin_perc}</td>
+                `;
+                lowMarginTableBody.appendChild(tr);
+            });
+            const totalData = infographicData.low_margin_analysis.slice(-1)[0];
+            document.getElementById('low-margin-total-parts').textContent = totalData.num_parts.toLocaleString();
+            document.getElementById('low-margin-total-revenue').textContent = totalData.total_revenue;
+            document.getElementById('low-margin-total-profit').textContent = totalData.total_profit_loss;
+            document.getElementById('low-margin-total-margin').textContent = totalData.weighted_margin_perc;
+
+
+            // Pricing Strategy Table
+            const pricingTableBody = document.getElementById('pricing-strategy-table');
+            infographicData.charts.pricingStrategyAnalysis.forEach(row => {
+                if (row.strategy) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="p-4 font-medium">${row.strategy}</td>
+                        <td class="p-4 text-right">${row.num_parts.toLocaleString()}</td>
+                        <td class="p-4 text-right font-semibold">${row.margin_perc}</td>
+                    `;
+                    pricingTableBody.appendChild(tr);
+                }
+            });
+
+            // --- Initialize Charts ---
+            const doughnutOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } } },
+                cutout: '60%'
+            };
+
+            const totalMarginValue = (infographicData.competitor_matching.revenue.matched * infographicData.competitor_matching.margin.matched) + (infographicData.competitor_matching.revenue.unmatched * infographicData.competitor_matching.margin.unmatched);
+            
+            new Chart(document.getElementById('parts-share-chart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [infographicData.competitor_matching.parts.matched, infographicData.competitor_matching.parts.unmatched], backgroundColor: ['#01768B', '#84C6D1'] }] },
+                options: doughnutOptions
+            });
+            new Chart(document.getElementById('revenue-share-chart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [infographicData.competitor_matching.revenue.matched, infographicData.competitor_matching.revenue.unmatched], backgroundColor: ['#7F187F', '#C98DC5'] }] },
+                options: doughnutOptions
+            });
+            new Chart(document.getElementById('margin-share-chart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [(infographicData.competitor_matching.revenue.matched * infographicData.competitor_matching.margin.matched) / totalMarginValue, (infographicData.competitor_matching.revenue.unmatched * infographicData.competitor_matching.margin.unmatched) / totalMarginValue], backgroundColor: ['#82D170', '#C6D636'] }] },
+                options: doughnutOptions
+            });
+            
+            const wayfairClassicPalette = ['#7F187F', '#C98DC5', '#01768B', '#84C6D1', '#C6D636', '#82D170', '#F8CF1C'];
+            const marginTierColors = ['#990E35', '#DC647E', '#F8CF1C', '#82D170', '#84C6D1', '#01768B'];
+
+
+            new Chart(document.getElementById('pricingStrategyByPriceTierChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: infographicData.charts.pricingStrategyByPriceTier.labels,
+                    datasets: infographicData.charts.pricingStrategyByPriceTier.datasets.map((ds, i) => ({...ds, backgroundColor: wayfairClassicPalette[i % wayfairClassicPalette.length]}))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { x: { stacked: true, title: { display: true, text: 'Price Tier'} }, y: { stacked: true, beginAtZero: true, title: { display: true, text: '# of Products' } } },
+                    plugins: { legend: { position: 'top' } }
+                }
+            });
+
+            new Chart(document.getElementById('marginPriceTierMatchedChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: infographicData.charts.marginPriceTierMatched.labels,
+                    datasets: infographicData.charts.marginPriceTierMatched.datasets.map((ds, i) => ({...ds, backgroundColor: marginTierColors[i % marginTierColors.length]}))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { x: { stacked: true, title: { display: true, text: 'Price Tier'} }, y: { stacked: true, beginAtZero: true, title: { display: true, text: '# of Products' } } },
+                    plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
