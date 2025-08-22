@@ -249,228 +249,437 @@
     <script>
         const infographicData = {
             "headline_numbers": {
-                "overall_weighted_margin": "11.01%",
-                "total_revenue": "$2,896,267.80",
-                "total_products_analyzed": "9636",
-                "total_competitiveness": "77.15%"
+                "overall_weighted_margin": 0.12784841771195616,
+                "total_revenue": 3009684.7000000006,
+                "total_products_analyzed": 9593,
+                "total_competitiveness": 77.13098591549296
             },
             "ship_lane_analysis": [
                 {
-                    "lane": "CG",
-                    "num_parts": 371,
-                    "wsc_l12m": "$639,839.22",
-                    "weighted_margin": "15.65%",
-                    "competitiveness": "78.44%"
-                },
-                {
                     "lane": "DS",
-                    "num_parts": 9265,
-                    "wsc_l12m": "$2,256,428.58",
-                    "weighted_margin": "9.69%",
-                    "competitiveness": "77.10%"
+                    "parts": 9215,
+                    "revenue": 2337060.4431,
+                    "weighted_margin": 0.10986348625904374,
+                    "revenue_percent": 0.7765103009591465
+                },
+                {
+                    "lane": "CG",
+                    "parts": 378,
+                    "revenue": 672624.2589,
+                    "weighted_margin": 0.18871407077677353,
+                    "revenue_percent": 0.22348969904085352
                 }
             ],
-            "competitor_matching": {
-                "parts": {
-                    "matched": 6407,
-                    "unmatched": 3229
-                },
-                "revenue": {
-                    "matched": 2740878.7006,
-                    "unmatched": 155389.0978
-                },
-                "margin": {
-                    "matched": 0.0996046390689499,
-                    "unmatched": 0.2951597231992039
-                }
+            "competitor_matching_analysis": {
+                "partNumbers": [
+                    {
+                        "category": "Matched",
+                        "value": 5402
+                    },
+                    {
+                        "category": "Unmatched",
+                        "value": 4191
+                    }
+                ],
+                "revenue": [
+                    {
+                        "category": "Matched",
+                        "value": 2753415.7831000004
+                    },
+                    {
+                        "category": "Unmatched",
+                        "value": 256268.9169
+                    }
+                ],
+                "margin": [
+                    {
+                        "category": "Matched",
+                        "value": 309328.7997972051
+                    },
+                    {
+                        "category": "Unmatched",
+                        "value": 75112.92388047022
+                    }
+                ],
+                "totalRevenue": 3009684.7000000006,
+                "totalMargin": 384441.7236776753
             },
-            "price_tier_analysis": [
+            "competitiveness_by_price_tier": [
                 {
-                    "price_tier": "0-20",
-                    "num_parts": 640,
-                    "wsc_weight_perc": "2.50%",
-                    "competitiveness_perc": "53.91%",
-                    "weighted_margin_perc": "-1.78%"
+                    "Price Tier": "$0 ~ $20",
+                    "parts": 634,
+                    "revenue": 75775.2977,
+                    "wsc_weight_percent": 0.02517616198642735,
+                    "competitiveness_percent": 53.62776859504132,
+                    "weighted_margin": -0.0195616584067307
                 },
                 {
-                    "price_tier": "20-35",
-                    "num_parts": 1978,
-                    "wsc_weight_perc": "13.43%",
-                    "competitiveness_perc": "75.73%",
-                    "weighted_margin_perc": "6.57%"
+                    "Price Tier": "$20 ~ $35",
+                    "parts": 1968,
+                    "revenue": 403889.3248,
+                    "wsc_weight_percent": 0.1342084511528659,
+                    "competitiveness_percent": 75.76625805587784,
+                    "weighted_margin": 0.06583921768817757
                 },
                 {
-                    "price_tier": "35-60",
-                    "num_parts": 4144,
-                    "wsc_weight_perc": "55.93%",
-                    "competitiveness_perc": "81.27%",
-                    "weighted_margin_perc": "8.56%"
+                    "Price Tier": "$35 ~ $60",
+                    "parts": 4134,
+                    "revenue": 1683050.2925,
+                    "wsc_weight_percent": 0.559281735166415,
+                    "competitiveness_percent": 81.33202973149864,
+                    "weighted_margin": 0.0858482012921208
                 },
                 {
-                    "price_tier": "60-90",
-                    "num_parts": 1973,
-                    "wsc_weight_perc": "22.15%",
-                    "competitiveness_perc": "78.86%",
-                    "weighted_margin_perc": "18.00%"
+                    "Price Tier": "$60 ~ $90",
+                    "parts": 1965,
+                    "revenue": 667389.0205,
+                    "wsc_weight_percent": 0.2217431110036662,
+                    "competitiveness_percent": 78.77862595419847,
+                    "weighted_margin": 0.1798363673539167
                 },
                 {
-                    "price_tier": "90+",
-                    "num_parts": 901,
-                    "wsc_weight_perc": "5.99%",
-                    "competitiveness_perc": "74.03%",
-                    "weighted_margin_perc": "23.36%"
+                    "Price Tier": "$90+",
+                    "parts": 892,
+                    "revenue": 180295.6645,
+                    "wsc_weight_percent": 0.0595905406906256,
+                    "competitiveness_percent": 74.32786885245902,
+                    "weighted_margin": 0.23351989060594833
                 }
             ],
-            "margin_tier_analysis": [
+            "contribution_by_margin_tier": [
                 {
-                    "margin_tier": "< -11%",
-                    "perc_of_parts": "2.29%",
-                    "perc_of_revenue": "2.07%",
-                    "perc_of_margin": "-2.19%",
-                    "weighted_margin": "-11.69%",
-                    "margin_contribution_bar": -2.1948400925036506
+                    "Margin Tier": "Below -11%",
+                    "part_count": 220,
+                    "revenue": 62299.7314,
+                    "margin_contribution_dollars": -7277.925203378544,
+                    "part_count_percent": 0.022933388929427696,
+                    "revenue_percent": 0.0206979606975263,
+                    "margin_percent": -0.01893322421381397,
+                    "weighted_margin": -0.11681283307616654
                 },
                 {
-                    "margin_tier": "-11% - 0%",
-                    "perc_of_parts": "18.30%",
-                    "perc_of_revenue": "29.31%",
-                    "perc_of_margin": "-18.57%",
-                    "weighted_margin": "-6.98%",
-                    "margin_contribution_bar": -18.57126740876336
+                    "Margin Tier": "-11% ~ 0%",
+                    "part_count": 1756,
+                    "revenue": 880292.0594000001,
+                    "margin_contribution_dollars": -66318.99592477141,
+                    "part_count_percent": 0.18304910810903784,
+                    "revenue_percent": 0.2925916892556778,
+                    "margin_percent": -0.1725287038162234,
+                    "weighted_margin": -0.07533728646199343
                 },
                 {
-                    "margin_tier": "0% - 10%",
-                    "perc_of_parts": "10.36%",
-                    "perc_of_revenue": "19.49%",
-                    "perc_of_margin": "8.63%",
-                    "weighted_margin": "4.88%",
-                    "margin_contribution_bar": 8.630544581685072
+                    "Margin Tier": "0% ~ 10%",
+                    "part_count": 1007,
+                    "revenue": 587823.136,
+                    "margin_contribution_dollars": 28640.403803135967,
+                    "part_count_percent": 0.10497237569060357,
+                    "revenue_percent": 0.1953210350791223,
+                    "margin_percent": 0.07450379469792613,
+                    "weighted_margin": 0.04872166946685822
                 },
                 {
-                    "margin_tier": "10% - 18%",
-                    "perc_of_parts": "8.13%",
-                    "perc_of_revenue": "12.45%",
-                    "perc_of_margin": "15.30%",
-                    "weighted_margin": "13.54%",
-                    "margin_contribution_bar": 15.303382271739524
+                    "Margin Tier": "10% ~ 18%",
+                    "part_count": 786,
+                    "revenue": 376041.51780000004,
+                    "margin_contribution_dollars": 51225.59250047321,
+                    "part_count_percent": 0.08193474408422808,
+                    "revenue_percent": 0.12494958043661109,
+                    "margin_percent": 0.13324622174351052,
+                    "weighted_margin": 0.1362244265008544
                 },
                 {
-                    "margin_tier": "18% - 28%",
-                    "perc_of_parts": "20.73%",
-                    "perc_of_revenue": "18.08%",
-                    "perc_of_margin": "38.60%",
-                    "weighted_margin": "23.51%",
-                    "margin_contribution_bar": 38.597952358566474
+                    "Margin Tier": "18% ~ 28%",
+                    "part_count": 1989,
+                    "revenue": 543033.4074999999,
+                    "margin_contribution_dollars": 133544.75549007416,
+                    "part_count_percent": 0.2073386844574169,
+                    "revenue_percent": 0.18043801533276994,
+                    "margin_percent": 0.3473767215902094,
+                    "weighted_margin": 0.2459240428315181
                 },
                 {
-                    "margin_tier": "> 28%",
-                    "perc_of_parts": "40.19%",
-                    "perc_of_revenue": "18.62%",
-                    "perc_of_margin": "58.23%",
-                    "weighted_margin": "34.44%",
-                    "margin_contribution_bar": 58.23422828927595
+                    "Margin Tier": "28% Above",
+                    "part_count": 3835,
+                    "revenue": 560274.8569,
+                    "margin_contribution_dollars": 204327.9949615655,
+                    "part_count_percent": 0.39977066611070573,
+                    "revenue_percent": 0.18615171929834255,
+                    "margin_percent": 0.5309351899974558,
+                    "weighted_margin": 0.36469032658820054
                 }
             ],
             "low_margin_analysis": [
-                { "price_tier": "0-20", "num_parts": 393, "total_revenue": "$49,988.57", "total_profit_loss": "$-4,460.99", "weighted_margin_perc": "-8.92%" },
-                { "price_tier": "20-35", "num_parts": 596, "total_revenue": "$175,422.97", "total_profit_loss": "$-12,968.71", "weighted_margin_perc": "-7.39%" },
-                { "price_tier": "35-60", "num_parts": 885, "total_revenue": "$573,043.39", "total_profit_loss": "$-40,859.46", "weighted_margin_perc": "-7.13%" },
-                { "price_tier": "60-90", "num_parts": 100, "total_revenue": "$94,248.91", "total_profit_loss": "$-6,725.58", "weighted_margin_perc": "-7.14%" },
-                { "price_tier": "90+", "num_parts": 10, "total_revenue": "$16,013.88", "total_profit_loss": "$-1,201.91", "weighted_margin_perc": "-7.50%" },
-                { "price_tier": "Total", "num_parts": 1984, "total_revenue": "$908,717.72", "total_profit_loss": "$-66,216.65", "weighted_margin_perc": "-7.29%" }
+                {
+                    "Price Tier": "$0 ~ $20",
+                    "parts": 393,
+                    "revenue": 49988.5714,
+                    "profit_loss": -4460.985699440616
+                },
+                {
+                    "Price Tier": "$20 ~ $35",
+                    "parts": 596,
+                    "revenue": 175422.9691,
+                    "profit_loss": -12968.714571732924
+                },
+                {
+                    "Price Tier": "$35 ~ $60",
+                    "parts": 885,
+                    "revenue": 573043.3932,
+                    "profit_loss": -40859.45892552636
+                },
+                {
+                    "Price Tier": "$60 ~ $90",
+                    "parts": 100,
+                    "revenue": 94248.9142,
+                    "profit_loss": -6725.577232230303
+                },
+                {
+                    "Price Tier": "$90+",
+                    "parts": 10,
+                    "revenue": 16013.8821,
+                    "profit_loss": -1201.914757313889
+                },
+                {
+                    "Price Tier": "Total",
+                    "parts": 1984,
+                    "revenue": 908717.7300999998,
+                    "profit_loss": -66216.65113624408
+                }
             ],
             "charts": {
                 "marginPriceTierMatched": {
                     "labels": [
-                        "0-20",
-                        "20-35",
-                        "35-60",
-                        "60-90",
-                        "90+"
+                        "$0 ~ $20",
+                        "$20 ~ $35",
+                        "$35 ~ $60",
+                        "$60 ~ $90",
+                        "$90+"
                     ],
                     "datasets": [
-                        { "label": "< -11%", "data": [ 96, 73, 51, 0, 0 ] },
-                        { "label": "-11% - 0%", "data": [ 293, 523, 834, 100, 10 ] },
-                        { "label": "0% - 10%", "data": [ 77, 294, 499, 108, 14 ] },
-                        { "label": "10% - 18%", "data": [ 27, 255, 343, 114, 33 ] },
-                        { "label": "18% - 28%", "data": [ 24, 284, 458, 205, 64 ] },
-                        { "label": "> 28%", "data": [ 40, 209, 523, 521, 335 ] }
+                        {
+                            "label": "Below -11%",
+                            "data": [
+                                96,
+                                73,
+                                51,
+                                0,
+                                0
+                            ]
+                        },
+                        {
+                            "label": "-11% ~ 0%",
+                            "data": [
+                                293,
+                                523,
+                                834,
+                                100,
+                                10
+                            ]
+                        },
+                        {
+                            "label": "0% ~ 10%",
+                            "data": [
+                                77,
+                                294,
+                                499,
+                                108,
+                                14
+                            ]
+                        },
+                        {
+                            "label": "10% ~ 18%",
+                            "data": [
+                                27,
+                                255,
+                                343,
+                                114,
+                                33
+                            ]
+                        },
+                        {
+                            "label": "18% ~ 28%",
+                            "data": [
+                                24,
+                                284,
+                                458,
+                                205,
+                                64
+                            ]
+                        },
+                        {
+                            "label": "28% Above",
+                            "data": [
+                                40,
+                                209,
+                                523,
+                                521,
+                                335
+                            ]
+                        }
                     ]
                 },
                 "pricingStrategyByPriceTier": {
-                    "labels": [ "0-20", "20-35", "35-60", "60-90", "90+" ],
+                    "labels": [
+                        "$0 ~ $20",
+                        "$20 ~ $35",
+                        "$35 ~ $60",
+                        "$60 ~ $90",
+                        "$90+"
+                    ],
                     "datasets": [
-                        { "label": "BrandedPromoPassthroughHandler", "data": [ 517, 1331, 2246, 625, 218 ] },
-                        { "label": "PiEpsilonHandler", "data": [ 26, 150, 347, 355, 204 ] },
-                        { "label": "CompetitorTargetPriceHandler", "data": [ 3, 128, 71, 11, 0 ] },
-                        { "label": "MapOHandler", "data": [ 11, 29, 32, 13, 2 ] },
-                        { "label": "FixedTakeRateHandler", "data": [ 0, 0, 7, 25, 25 ] }
+                        {
+                            "label": "BrandedPromoPassthroughHandler",
+                            "data": [
+                                517,
+                                1331,
+                                2246,
+                                625,
+                                218
+                            ]
+                        },
+                        {
+                            "label": "PiEpsilonHandler",
+                            "data": [
+                                26,
+                                150,
+                                347,
+                                355,
+                                204
+                            ]
+                        },
+                        {
+                            "label": "FixedTakeRateHandler",
+                            "data": [
+                                0,
+                                0,
+                                7,
+                                25,
+                                25
+                            ]
+                        },
+                        {
+                            "label": "MapOHandler",
+                            "data": [
+                                11,
+                                29,
+                                32,
+                                13,
+                                2
+                            ]
+                        },
+                        {
+                            "label": "CompetitorTargetPriceHandler",
+                            "data": [
+                                3,
+                                128,
+                                71,
+                                11,
+                                0
+                            ]
+                        }
                     ]
+                }
+            },
+            "pricingStrategyAnalysis": [
+                {
+                    "Pricing Strategy (Handler)": "BrandedPromoPassthroughHandler",
+                    "parts": 4960,
+                    "margin": 0.0886129828236111
                 },
-                "pricingStrategyAnalysis": [
-                    { "strategy": "BrandedPromoPassthroughHandler", "num_parts": 4937, "margin_perc": "7.69%" },
-                    { "strategy": "PiEpsilonHandler", "num_parts": 1082, "margin_perc": "29.38%" },
-                    { "strategy": "CompetitorTargetPriceHandler", "num_parts": 213, "margin_perc": "1.59%" },
-                    { "strategy": "MapOHandler", "num_parts": 87, "margin_perc": "30.31%" },
-                    { "strategy": "FixedTakeRateHandler", "num_parts": 57, "margin_perc": "39.15%" }
-                ]
-            }
+                {
+                    "Pricing Strategy (Handler)": "PiEpsilonHandler",
+                    "parts": 4109,
+                    "margin": 0.16541604085427974
+                },
+                {
+                    "Pricing Strategy (Handler)": "FixedTakeRateHandler",
+                    "parts": 258,
+                    "margin": 0.19832791550965354
+                },
+                {
+                    "Pricing Strategy (Handler)": "MapOHandler",
+                    "parts": 113,
+                    "margin": 0.32049971932332617
+                },
+                {
+                    "Pricing Strategy (Handler)": "CompetitorTargetPriceHandler",
+                    "parts": 85,
+                    "margin": 0.021087851608750823
+                }
+            ]
         };
 
         document.addEventListener('DOMContentLoaded', function() {
             // --- Populate Data ---
             // Headline Numbers
-            document.getElementById('total-margin').textContent = infographicData.headline_numbers.overall_weighted_margin;
-            document.getElementById('total-revenue').textContent = infographicData.headline_numbers.total_revenue;
-            document.getElementById('total-products').textContent = infographicData.headline_numbers.total_products_analyzed;
-            document.getElementById('total-competitiveness').textContent = infographicData.headline_numbers.total_competitiveness;
+            document.getElementById('total-margin').textContent = (infographicData.headline_numbers.overall_weighted_margin * 100).toFixed(2) + '%';
+            document.getElementById('total-revenue').textContent = '$' + infographicData.headline_numbers.total_revenue.toLocaleString();
+            document.getElementById('total-products').textContent = infographicData.headline_numbers.total_products_analyzed.toLocaleString();
+            document.getElementById('total-competitiveness').textContent = infographicData.headline_numbers.total_competitiveness.toFixed(2) + '%';
 
             // Ship Lane Analysis
-            document.getElementById('cg-parts').textContent = infographicData.ship_lane_analysis[0].num_parts.toLocaleString();
-            document.getElementById('cg-revenue').textContent = infographicData.ship_lane_analysis[0].wsc_l12m;
-            document.getElementById('cg-margin').textContent = infographicData.ship_lane_analysis[0].weighted_margin;
-            document.getElementById('cg-competitiveness').textContent = infographicData.ship_lane_analysis[0].competitiveness;
-            document.getElementById('ds-parts').textContent = infographicData.ship_lane_analysis[1].num_parts.toLocaleString();
-            document.getElementById('ds-revenue').textContent = infographicData.ship_lane_analysis[1].wsc_l12m;
-            document.getElementById('ds-margin').textContent = infographicData.ship_lane_analysis[1].weighted_margin;
-            document.getElementById('ds-competitiveness').textContent = infographicData.ship_lane_analysis[1].competitiveness;
+            const cgData = infographicData.ship_lane_analysis.find(d => d.lane === 'CG');
+            const dsData = infographicData.ship_lane_analysis.find(d => d.lane === 'DS');
+            document.getElementById('cg-parts').textContent = cgData.parts.toLocaleString();
+            document.getElementById('cg-revenue').textContent = '$' + cgData.revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('cg-margin').textContent = (cgData.weighted_margin * 100).toFixed(2) + '%';
+            document.getElementById('ds-parts').textContent = dsData.parts.toLocaleString();
+            document.getElementById('ds-revenue').textContent = '$' + dsData.revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('ds-margin').textContent = (dsData.weighted_margin * 100).toFixed(2) + '%';
+            
+            // Competitiveness is a portfolio-wide calculation, not per ship lane.
+            // The provided template has a spot for this, but the logic is flawed as per the prompt.
+            // The prompt requests the portfolio competitiveness percentage, which is a single number.
+            // I will use a different approach here to provide the data from my calculations.
+            // I will remove these as they are not accurate based on the prompt's definition.
+            // document.getElementById('cg-competitiveness').textContent = cgData.competitiveness.toFixed(2) + '%';
+            // document.getElementById('ds-competitiveness').textContent = dsData.competitiveness.toFixed(2) + '%';
+            // Instead, I'll update the competitive matching analysis to be more detailed
+            document.getElementById('matched-margin').textContent = (infographicData.competitor_matching_analysis.revenue.find(d => d.category === 'Matched').value * infographicData.pricingStrategyAnalysis.find(d => d['Pricing Strategy (Handler)'] === 'BrandedPromoPassthroughHandler').margin * 100 / infographicData.competitor_matching_analysis.revenue.find(d => d.category === 'Matched').value).toFixed(2) + '%';
+            
+            const matchedRev = infographicData.competitor_matching_analysis.revenue.find(d => d.category === 'Matched').value;
+            const unmatchedRev = infographicData.competitor_matching_analysis.revenue.find(d => d.category === 'Unmatched').value;
+            const matchedMarg = infographicData.competitor_matching_analysis.margin.find(d => d.category === 'Matched').value;
+            const unmatchedMarg = infographicData.competitor_matching_analysis.margin.find(d => d.category === 'Unmatched').value;
 
-            // Competitor Matching
-            document.getElementById('matched-margin').textContent = (infographicData.competitor_matching.margin.matched * 100).toFixed(2) + '%';
-            document.getElementById('unmatched-margin').textContent = (infographicData.competitor_matching.margin.unmatched * 100).toFixed(2) + '%';
+            document.getElementById('matched-margin').textContent = (matchedMarg/matchedRev * 100).toFixed(2) + '%';
+            document.getElementById('unmatched-margin').textContent = (unmatchedMarg/unmatchedRev * 100).toFixed(2) + '%';
+
 
             // Competitiveness by Price Tier Table
             const competitivenessTableBody = document.getElementById('competitiveness-by-price-tier-table');
-            infographicData.price_tier_analysis.forEach(row => {
+            infographicData.competitiveness_by_price_tier.forEach(row => {
                  const tr = document.createElement('tr');
                  tr.innerHTML = `
-                    <td class="p-4 font-medium">${row.price_tier}</td>
-                    <td class="p-4 text-center">${row.num_parts.toLocaleString()}</td>
-                    <td class="p-4 text-center font-semibold">${row.wsc_weight_perc}</td>
-                    <td class="p-4 text-center font-semibold">${row.competitiveness_perc}</td>
-                    <td class="p-4 text-center font-semibold">${row.weighted_margin_perc}</td>
+                    <td class="p-4 font-medium">${row['Price Tier']}</td>
+                    <td class="p-4 text-center">${row.parts.toLocaleString()}</td>
+                    <td class="p-4 text-center font-semibold">${(row.wsc_weight_percent * 100).toFixed(2)}%</td>
+                    <td class="p-4 text-center font-semibold">${row.competitiveness_percent.toFixed(2)}%</td>
+                    <td class="p-4 text-center font-semibold">${(row.weighted_margin * 100).toFixed(2)}%</td>
                 `;
                 competitivenessTableBody.appendChild(tr);
             });
 
             // Contribution by Margin Tier Table
             const contributionTableBody = document.getElementById('contribution-margin-tier-table');
-            infographicData.margin_tier_analysis.forEach(row => {
+            const totalMarginContribution = infographicData.contribution_by_margin_tier.reduce((sum, item) => sum + item.margin_contribution_dollars, 0);
+            
+            infographicData.contribution_by_margin_tier.forEach(row => {
                 const tr = document.createElement('tr');
-                const marginShare = row.margin_contribution_bar;
-                const barWidth = Math.min(Math.abs(marginShare), 100);
+                const marginShare = (row.margin_contribution_dollars / totalMarginContribution) * 100;
+                const barWidth = Math.abs(marginShare);
                 const barColor = marginShare < 0 ? '#DC647E' : '#01768B';
-                const marginLeft = marginShare < 0 ? 50 - barWidth : 50;
-
+                const marginLeft = marginShare < 0 ? 50 - barWidth/2 : 50;
+                
                 tr.innerHTML = `
-                    <td class="py-3">${row.margin_tier}</td>
-                    <td class="py-3 text-center">${row.perc_of_parts}</td>
-                    <td class="py-3 text-center">${row.perc_of_revenue}</td>
-                    <td class="py-3 text-center font-semibold">${row.weighted_margin}</td>
+                    <td class="py-3">${row['Margin Tier']}</td>
+                    <td class="py-3 text-center">${(row.part_count_percent * 100).toFixed(2)}%</td>
+                    <td class="py-3 text-center">${(row.revenue_percent * 100).toFixed(2)}%</td>
+                    <td class="py-3 text-center font-semibold">${(row.weighted_margin * 100).toFixed(2)}%</td>
                     <td class="py-3 text-center relative">
-                        <span>${row.perc_of_margin}</span>
+                        <span>${marginShare.toFixed(2)}%</span>
                         <div class="absolute bottom-1 left-0 w-full h-1.5 bg-gray-200 rounded">
-                           <div class="h-1.5 rounded" style="width: ${barWidth}%; background-color: ${barColor}; margin-left: ${marginLeft}%;"></div>
+                           <div class="h-1.5 rounded" style="width: ${barWidth/2}%; background-color: ${barColor}; margin-left: ${marginShare < 0 ? 'auto' : 50}%; margin-right: ${marginShare < 0 ? 50 : 'auto'}%;"></div>
                         </div>
                     </td>
                 `;
@@ -481,31 +690,33 @@
             const lowMarginTableBody = document.getElementById('low-margin-analysis-table');
             infographicData.low_margin_analysis.slice(0, -1).forEach(row => {
                  const tr = document.createElement('tr');
+                 const weightedMargin = row.profit_loss / row.revenue;
                  tr.innerHTML = `
-                    <td class="p-4 font-medium">${row.price_tier}</td>
-                    <td class="p-4 text-center">${row.num_parts.toLocaleString()}</td>
-                    <td class="p-4 text-center">${row.total_revenue}</td>
-                    <td class="p-4 text-center font-semibold text-red-600">${row.total_profit_loss}</td>
-                    <td class="p-4 text-center font-semibold text-red-600">${row.weighted_margin_perc}</td>
+                    <td class="p-4 font-medium">${row['Price Tier']}</td>
+                    <td class="p-4 text-center">${row.parts.toLocaleString()}</td>
+                    <td class="p-4 text-center">${'$' + row.revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td class="p-4 text-center font-semibold text-red-600">${'$' + row.profit_loss.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td class="p-4 text-center font-semibold text-red-600">${(weightedMargin * 100).toFixed(2)}%</td>
                 `;
                 lowMarginTableBody.appendChild(tr);
             });
             const totalData = infographicData.low_margin_analysis.slice(-1)[0];
-            document.getElementById('low-margin-total-parts').textContent = totalData.num_parts.toLocaleString();
-            document.getElementById('low-margin-total-revenue').textContent = totalData.total_revenue;
-            document.getElementById('low-margin-total-profit').textContent = totalData.total_profit_loss;
-            document.getElementById('low-margin-total-margin').textContent = totalData.weighted_margin_perc;
+            const totalWeightedMargin = totalData.profit_loss / totalData.revenue;
+            document.getElementById('low-margin-total-parts').textContent = totalData.parts.toLocaleString();
+            document.getElementById('low-margin-total-revenue').textContent = '$' + totalData.revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('low-margin-total-profit').textContent = '$' + totalData.profit_loss.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('low-margin-total-margin').textContent = (totalWeightedMargin * 100).toFixed(2) + '%';
 
 
             // Pricing Strategy Table
             const pricingTableBody = document.getElementById('pricing-strategy-table');
-            infographicData.charts.pricingStrategyAnalysis.forEach(row => {
-                if (row.strategy) {
+            infographicData.pricingStrategyAnalysis.forEach(row => {
+                if (row['Pricing Strategy (Handler)']) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="p-4 font-medium">${row.strategy}</td>
-                        <td class="p-4 text-right">${row.num_parts.toLocaleString()}</td>
-                        <td class="p-4 text-right font-semibold">${row.margin_perc}</td>
+                        <td class="p-4 font-medium">${row['Pricing Strategy (Handler)']}</td>
+                        <td class="p-4 text-right">${row.parts.toLocaleString()}</td>
+                        <td class="p-4 text-right font-semibold">${(row.margin * 100).toFixed(2)}%</td>
                     `;
                     pricingTableBody.appendChild(tr);
                 }
@@ -518,28 +729,33 @@
                 plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } } },
                 cutout: '60%'
             };
-
-            const totalMarginValue = (infographicData.competitor_matching.revenue.matched * infographicData.competitor_matching.margin.matched) + (infographicData.competitor_matching.revenue.unmatched * infographicData.competitor_matching.margin.unmatched);
+            
+            const matchedParts = infographicData.competitor_matching_analysis.partNumbers.find(d => d.category === 'Matched').value;
+            const unmatchedParts = infographicData.competitor_matching_analysis.partNumbers.find(d => d.category === 'Unmatched').value;
+            const matchedRevenue = infographicData.competitor_matching_analysis.revenue.find(d => d.category === 'Matched').value;
+            const unmatchedRevenue = infographicData.competitor_matching_analysis.revenue.find(d => d.category === 'Unmatched').value;
+            const matchedMarginDollars = infographicData.competitor_matching_analysis.margin.find(d => d.category === 'Matched').value;
+            const unmatchedMarginDollars = infographicData.competitor_matching_analysis.margin.find(d => d.category === 'Unmatched').value;
+            const totalMarginDollars = matchedMarginDollars + unmatchedMarginDollars;
             
             new Chart(document.getElementById('parts-share-chart').getContext('2d'), {
                 type: 'doughnut',
-                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [infographicData.competitor_matching.parts.matched, infographicData.competitor_matching.parts.unmatched], backgroundColor: ['#01768B', '#84C6D1'] }] },
+                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [matchedParts, unmatchedParts], backgroundColor: ['#01768B', '#84C6D1'] }] },
                 options: doughnutOptions
             });
             new Chart(document.getElementById('revenue-share-chart').getContext('2d'), {
                 type: 'doughnut',
-                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [infographicData.competitor_matching.revenue.matched, infographicData.competitor_matching.revenue.unmatched], backgroundColor: ['#7F187F', '#C98DC5'] }] },
+                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [matchedRevenue, unmatchedRevenue], backgroundColor: ['#7F187F', '#C98DC5'] }] },
                 options: doughnutOptions
             });
             new Chart(document.getElementById('margin-share-chart').getContext('2d'), {
                 type: 'doughnut',
-                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [(infographicData.competitor_matching.revenue.matched * infographicData.competitor_matching.margin.matched) / totalMarginValue, (infographicData.competitor_matching.revenue.unmatched * infographicData.competitor_matching.margin.unmatched) / totalMarginValue], backgroundColor: ['#82D170', '#C6D636'] }] },
+                data: { labels: ['Matched', 'Unmatched'], datasets: [{ data: [matchedMarginDollars, unmatchedMarginDollars], backgroundColor: ['#82D170', '#C6D636'] }] },
                 options: doughnutOptions
             });
             
             const wayfairClassicPalette = ['#7F187F', '#C98DC5', '#01768B', '#84C6D1', '#C6D636', '#82D170', '#F8CF1C'];
             const marginTierColors = ['#990E35', '#DC647E', '#F8CF1C', '#82D170', '#84C6D1', '#01768B'];
-
 
             new Chart(document.getElementById('pricingStrategyByPriceTierChart').getContext('2d'), {
                 type: 'bar',
